@@ -1,0 +1,38 @@
+﻿@model Foundation.DTO.Paycheck
+
+<div class="container">
+    @using (Html.BeginForm("Update", "Paycheck", FormMethod.Post))
+    {
+        @Html.HiddenFor(m => m.PaycheckID, new { @Value = Model.PaycheckID })
+
+        <div class="card">
+            <div class="card-header">
+                <h4>@Model.Employee.FirstName @Model.Employee.LastName</h4>
+            </div>
+            <div class="card-body form-rows align-2">
+                <div class="required form-group">
+                    <label for="TotalEarnings">Total Earnings</label>
+                    <input class="form-control" id="TotalEarnings" name="TotalEarnings" type="number" min="1" step="any" value="">
+                </div>
+                <div class="required form-group">
+                    <label for="TotalDeductions">Deductions</label>
+                    <input class="form-control" id="TotalDeductions" name="TotalEarnings" type="number" min="1" step="any" value="">
+                </div>
+                <div class="required form-group">
+                    <label for="TotalTaxes">Taxes</label>
+                    <input class="form-control" id="TotalTaxes" name="TotalEarnings" type="number" min="1" step="any" value="">
+                </div>
+                <div class="required form-group">
+                    <label for="NetPay">Net Earnings</label>
+                    <input class="form-control" id="NetPay" name="TotalEarnings" type="number" min="1" step="any" value="">
+                </div>
+
+
+
+            </div>
+            <div class="card-footer d-flex justify-content-end">
+
+            </div>
+        </div>
+    }
+</div>

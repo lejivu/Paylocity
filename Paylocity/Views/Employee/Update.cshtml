@@ -1,0 +1,70 @@
+﻿@model EmployeeViewModel
+
+<div class="container">
+    @using (Html.BeginForm("Update", "Employee", FormMethod.Post, new { id = "formEmployee" }))
+    {
+        @Html.HiddenFor(m => m.employee.EmployeeID, new { @Value = Model.employee.EmployeeID })
+        @Html.HiddenFor(m => m.employee.CreateDate, new { @Value = Model.employee.CreateDate })
+
+        <div class="card">
+            <div class="card-header">
+                <h4>@Model.employee.FirstName @Model.employee.LastName</h4>
+            </div>
+            <div class="card-body form-rows align-2">
+                <div class="required form-group">
+                    <label for="employee.FirstName">First Name</label>
+                    <input class="form-control" id="employee.FirstName" name="employee.FirstName" value="@Model.employee.FirstName">
+                </div>
+                <div class="required form-group">
+                    <label for="employee.LastName">Last Name</label>
+                    <input class="form-control" id="employee.LastName" name="employee.LastName" value="@Model.employee.LastName">
+                </div>
+                <div class="required form-group">
+                    <label for="employee.AnnualSalary">Annual Salary</label>
+                    <input class="form-control" id="employee.AnnualSalary" name="employee.AnnualSalary" type="number" min="1" step="any" value="@Model.employee.AnnualSalary">
+                </div>
+                <div class="required form-group" id="dependentsSection">
+                    @{ int i = 0; }
+
+                    <h3 for="Dependents">Dependents</h3>
+                    <button type="button" id="addDependents">Add Dependents</button>
+
+                    @foreach (var dependent in Model.employee.Dependents)
+                    {
+                        <div>
+                            <label>Dependent Name</label>
+                            <input class="form-control" id="employee.Dependents[@i].Name" name="employee.Dependents[@i].Name" value="@dependent.Name">
+                        </div>
+                        i++;
+                    }
+                    <input type="hidden" id="currentDependentsValue" value="@i" />
+                </div>
+                <div class="required form-group">
+                    <label for="employee.isEmployerPackagePaid" class="mr-2">Pay Employee Benefits Package</label>
+                    @Html.CheckBoxFor(x => x.employee.isEmployerPackagePaid, new { style = "transform: scale(1.5);-webkit-transform: scale(1.5);" })
+                </div>
+                <div id="employerExpenses">
+                    <button id="calculateExpensesButton" type="button">Calculate Expenses</button>
+                    <div class="required form-group">
+                        <label for="employee.AnnualPackageExpense">Employer Annual Package Expense</label>
+                        <input class="form-control" id="employee.AnnualPackageExpense" name="employee.AnnualPackageExpense" readonly="readonly" value="@Model.employee.AnnualPackageExpense">
+
+                        <label for="PackageExpensePerPaycheck">Employer Package Expense Per Paycheck</label>
+                        <input class="form-control" id="PackageExpensePerPaycheck" readonly="readonly" value="">
+                    </div>
+                    <div class="required form-group">
+                        <label for="employee.NetPay">Employee Annual Net Pay</label>
+                        <input class="form-control" id="employee.NetPay" name="employee.NetPay" readonly="readonly" value="@Model.employee.NetPay">
+
+                        <label for="NetPayPerPaycheck">Employee Net Pay Per Paycheck</label>
+                        <input class="form-control" id="NetPayPerPaycheck" readonly="readonly" value="">
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-end">
+                <button class="mr-1" style="border-color:none;" type="button"><a href="/Employee/Index">Cancel</a></button>
+                <button class="btn btn-success" type="submit">Update</button>
+            </div>
+        </div>
+    }
+</div>

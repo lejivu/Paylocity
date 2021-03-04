@@ -1,0 +1,52 @@
+﻿@model List<Foundation.DTO.Paycheck>
+
+<div class="container">
+    <div class="text-right">
+        @Html.ActionLink("Create New", "Update", null, new { @class = "btn btn-primary" })
+    </div>
+
+    <hr class="col-12">
+    <div class="card results">
+        <div class="card-header">
+            <h4>Current Paychecks</h4>
+        </div>
+        <table id="PaycheckList" class="table-striped table-hover table-bordered w-100">
+            <thead>
+                <tr>
+                    <th scope="col" style="min-width:70px"></th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Total Earnings</th>
+                    <th scope="col">Total Deductions</th>
+                    <th scope="col">Total Taxes</th>
+                    <th scope="col">Net Pay</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var row in Model)
+                {
+                    <tr>
+                        <td class="text-center no-decoration">
+                            <a href="@Url.Action("Update", "Paycheck", new { id = row.PaycheckID })">
+                                <span class="far fa-edit"></span>
+                            </a>
+                        </td>
+                        <td>@row.Employee.FirstName</td>
+                        <td>@row.Employee.LastName</td>
+                        <td>@row.TotalEarnings</td>
+                        <td>@row.TotalDeductions</td>
+                        <td>@row.TotalTaxes</td>
+                        <td>@row.NetPay</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="card-footer">
+            <p class="font-weight-bold">Note:</p>
+            <ul class="fa-ul">
+                <li>Select the <i class="far fa-edit"></i> icon to edit </li>
+            </ul>
+        </div>
+    </div>
+</div>
